@@ -4,7 +4,7 @@ This Yocto layer provides a recipe for building and packaging a C-based automoti
 
 ## Layer Contents
 
-The layer contains the Yocto recipe and application source files required to build the `car-ecu` application.
+The layer contains the Yocto recipe and the application source files required to build the `car-ecu` application.
 
 ### Directory Structure
 
@@ -15,7 +15,7 @@ meta-car-ecu/
 │       ├── car-ecu_1.0.bb
 │       └── files/
 │           └── <application source files>
-└── README
+└── README.md
 ```
 
 ## Dependencies
@@ -24,17 +24,17 @@ This layer depends on:
 
 * OpenEmbedded-Core (`oe-core`)
 
-Make sure the layer is used with a compatible Yocto/OpenEmbedded build environment.
+The layer should be used within a compatible Yocto/OpenEmbedded build environment.
 
 ## Application Source
 
-The source files for the automotive ECU simulation application are included in:
+The source files for the automotive ECU simulation application are located in:
 
 ```text
 recipes-example/car-ecu/files/
 ```
 
-The recipe uses these source files to build the application with the Yocto cross-compilation toolchain.
+The Yocto recipe uses these source files to build the application with the Yocto cross-compilation toolchain.
 
 ## Recipe
 
@@ -44,13 +44,13 @@ The main recipe is:
 recipes-example/car-ecu/car-ecu_1.0.bb
 ```
 
-The recipe:
+The recipe performs the following tasks:
 
 1. Fetches the application source files from the layer.
 2. Compiles the C source code using the Yocto cross-compiler.
 3. Installs the resulting executable into the target root filesystem.
 
-The resulting application is installed as:
+The resulting executable is installed at:
 
 ```text
 /usr/bin/car_ecu_app
@@ -58,30 +58,40 @@ The resulting application is installed as:
 
 ## Building the Application
 
-After adding `meta-car-ecu` to your Yocto build environment, build the recipe using:
+After adding the `meta-car-ecu` layer to the Yocto build environment, build the recipe using:
 
 ```bash
 bitbake car-ecu
 ```
 
-A successful build produces the `car_ecu_app` executable for the configured target architecture.
+This builds the application for the configured target architecture.
 
 ## Adding the Application to an Image
 
-To include the application in a Yocto image, add the following to `local.conf`:
+To include the `car-ecu` application in a Yocto image, add the following to `conf/local.conf`:
 
 ```bitbake
 IMAGE_INSTALL:append = " car-ecu"
 ```
 
-Then build the desired image, for example:
+Then build the target image:
 
 ```bash
 bitbake core-image-minimal
 ```
 
-After booting the generated image, the application can be executed with:
+This creates a target image containing the `car-ecu` application.
+
+## Running the Application
+
+After booting the generated image on the target system, the application can be executed using:
 
 ```bash
 car_ecu_app
+```
+
+Alternatively, it can be executed using its full path:
+
+```bash
+/usr/bin/car_ecu_app
 ```
