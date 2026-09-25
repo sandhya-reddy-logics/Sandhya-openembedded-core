@@ -1,0 +1,36 @@
+meta-car-ecu
+============
+
+This layer contains the Yocto recipe for building the automotive ECU
+simulation application.
+
+Dependencies
+============
+
+This layer depends on:
+
+- OpenEmbedded-Core (oe-core)
+
+The application source code is included under:
+
+    recipes-example/car-ecu/files/
+
+Recipe
+======
+
+The main recipe is:
+
+    recipes-example/car-ecu/car-ecu_1.0.bb
+
+The recipe builds the C-based automotive ECU simulation application
+using the Yocto cross-compiler and installs the resulting executable
+as:
+
+    /usr/bin/car_ecu_app
+
+Build
+=====
+
+Add this layer to your Yocto build and run:
+
+    bitbake car-ecu
